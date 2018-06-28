@@ -1,3 +1,4 @@
+
 name: godot
 version: '3.0.4'
 summary: Godot Engine – Multi-platform 2D and 3D game engine
@@ -9,14 +10,14 @@ description: |
   be exported in one click to a number of platforms, including
   the major desktop platforms (Linux, Mac OSX, Windows) as well
   as mobile (Android, iOS) and web-based (HTML5) platforms..
-
 confinement: strict
 
 apps:
   godot:
-    command: desktop-launch $SNAP/Godot_v3.0.4-stable_x11.64
+    command: desktop-launch $SNAP/bin/Godot
     plugs:
       - network
+      - network-bind
       - opengl
       - desktop
       - desktop-legacy
@@ -29,7 +30,9 @@ parts:
   godot:
     after: [desktop-glib-only]
     plugin: dump
-    source: https://downloads.tuxfamily.org/godotengine/3.0.4/Godot_v3.0.4-stable_x11.64.zip
+    source:
+      - on amd64: https://downloads.tuxfamily.org/godotengine/3.0.4/Godot_v$SNAPCRAFT_PROJECT_VERSION-stable_x11.64.zip
+      - on i386: https://downloads.tuxfamily.org/godotengine/3.0.4/Godot_v$SNAPCRAFT_PROJECT_VERSION-stable_x11.32.zip
     stage-packages:
       - libgl1-mesa-dri
       - libglu1-mesa
@@ -53,3 +56,4 @@ parts:
       - libwebp5
     organize:
       'usr/lib/*/pulseaudio/lib*': 'lib/'
+      'Godot_v3.0.4-stable_x11.*': 'bin/Godot'
