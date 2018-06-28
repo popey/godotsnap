@@ -1,6 +1,5 @@
 name: godot
-version: 'master'
-version-script: git -C parts/godot/src describe --tags
+version: '3.0.4'
 summary: Godot Engine – Multi-platform 2D and 3D game engine
 description: |
   Godot Engine is a feature-packed, cross-platform game engine to
@@ -15,7 +14,7 @@ confinement: strict
 
 apps:
   godot:
-    command: desktop-launch $SNAP/bin/godot
+    command: desktop-launch $SNAP/Godot_v3.0.4-stable_x11.64
     plugs:
       - network
       - opengl
@@ -29,28 +28,8 @@ apps:
 parts:
   godot:
     after: [desktop-glib-only]
-    plugin: nil
-    source: https://github.com/godotengine/godot.git
-#    source-tag: '3.0.2-stable'
-    prepare: |
-      last_committed_tag="$(git describe --tags $(git rev-list --tags --max-count=1))"
-      last_released_tag="$(snap info godot | awk '$1 == "beta:" { print $2 }')"
-      # If the latest tag from the upstream project has not been released to
-      # beta, build that tag instead of master.
-      if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
-        git fetch
-        git checkout "${last_committed_tag}"
-        cd ../src
-        git checkout "${last_committed_tag}"
-      fi
-    build: |
-      export PKG_CONFIG_PATH=$SNAPCRAFT_STAGE/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig
-      env
-      scons unix_global_settings_path=/snap/godot/current/ platform=x11 use_llvm=yes verbose=yes builtin_freetype=no builtin_libmpcdec=yes builtin_libogg=no builtin_libpng=no builtin_libtheora=no builtin_libvorbis=no builtin_libwebp=no builtin_openssl=no builtin_opus=yes builtin_speex=no builtin_squish=yes builtin_zlib=no pulseaudio=yes udev=yes target=release_debug tools=yes
-    install: |
-      mkdir $SNAPCRAFT_PART_INSTALL/bin
-      cp bin/godot.x11.opt.tools.*.llvm $SNAPCRAFT_PART_INSTALL/bin/godot
-      #rm $SNAPCRAFT_PART_INSTALL/templates/linux_x11_64_release/godot.x11.opt.tools.64.llvm
+    plugin: dump
+    source: https://downloads.tuxfamily.org/godotengine/3.0.4/Godot_v3.0.4-stable_x11.64.zip
     stage-packages:
       - libgl1-mesa-dri
       - libglu1-mesa
@@ -74,24 +53,3 @@ parts:
       - libwebp5
     organize:
       'usr/lib/*/pulseaudio/lib*': 'lib/'
-    build-packages:
-      - build-essential
-      - scons 
-      - pkg-config
-      - clang
-      - libx11-dev
-      - libxcursor-dev
-      - libxinerama-dev
-      - libgl1-mesa-dev
-      - libglu-dev
-      - libasound2-dev
-      - libpulse-dev
-      - libfreetype6-dev
-      - libssl-dev
-      - libudev-dev
-      - libxrandr-dev
-      - libwebp-dev
-      - libxi-dev
-      - libtheora-dev
-      - libvorbis-dev
-      - g++-mingw-w64
