@@ -31,7 +31,7 @@ do
     while IFS='' read -r line || [[ -n "$line" ]]; do
     if [[ $line = *"$NEXVER"* ]]; then
     echo "Updating files to: "$NEXVER
-    # grep -rl $CURVER . --exclude-dir=.git | xargs sed -i 's/$CURVER/$NEXVER/g'
+    grep -rl $CURVER . --exclude-dir=.git | xargs sed -i s@$CURVER@$NEXVER@g
     fi
     done < "$PWD/current"
 done
