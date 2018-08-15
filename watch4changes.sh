@@ -3,6 +3,7 @@ function strip {
     local STRING=${1#$"$2"}
     echo ${STRING%$"$2"}
 }
+GITCOMMIT='false'
 #Find version
 REPOVER=$(strip "$(grep ersion: "$PWD/snap/snapcraft.yaml" 2>/dev/null|sed 's/^version: "//;s/"$//')" "version: ") 
 CURVER=$(strip "$REPOVER" "'")
@@ -36,3 +37,7 @@ do
     done < "$PWD/current"
 done
 rm -rf "$PWD/current"
+if [ "$GITCOMMIT" == "true" ]
+then
+    git add *
+    git commit -m "Version has changed to: $NEXVER"
