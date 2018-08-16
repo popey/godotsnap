@@ -1,0 +1,19 @@
+{
+    "cron.jobs": {
+        "jobs": [
+            {
+                "name": "Update snap version",
+                "description": "Updates the version of the snap if it needs to",
+
+                // "autoStart": true,
+                "action": {
+                    "type":"command",
+                    "command": "workbench.action.terminal.runSelectedText",
+                    "arguments": [
+                        "./watch4changes.sh"
+                    ]
+                }
+            }
+        ]
+    }
+}
