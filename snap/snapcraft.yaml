@@ -1,6 +1,6 @@
 
 name: godot
-version: '3.0.4'
+version: '3.0.6'
 summary: Godot Engine – Multi-platform 2D and 3D game engine
 description: |
   Godot Engine is a feature-packed, cross-platform game engine to
@@ -31,8 +31,8 @@ parts:
     after: [desktop-glib-only]
     plugin: dump
     source:
-      - on amd64: https://downloads.tuxfamily.org/godotengine/3.0.4/Godot_v$SNAPCRAFT_PROJECT_VERSION-stable_x11.64.zip
-      - on i386: https://downloads.tuxfamily.org/godotengine/3.0.4/Godot_v$SNAPCRAFT_PROJECT_VERSION-stable_x11.32.zip
+      - on amd64: https://downloads.tuxfamily.org/godotengine/$SNAPCRAFT_PROJECT_VERSION/Godot_v$SNAPCRAFT_PROJECT_VERSION-stable_x11.64.zip
+      - on i386: https://downloads.tuxfamily.org/godotengine/$SNAPCRAFT_PROJECT_VERSION/Godot_v$SNAPCRAFT_PROJECT_VERSION-stable_x11.32.zip
     stage-packages:
       - libgl1-mesa-dri
       - libglu1-mesa
@@ -56,4 +56,4 @@ parts:
       - libwebp5
     organize:
       'usr/lib/*/pulseaudio/lib*': 'lib/'
-      'Godot_v3.0.4-stable_x11.*': 'bin/Godot'
+      'Godot_v*-stable_x11.*': 'bin/Godot'
