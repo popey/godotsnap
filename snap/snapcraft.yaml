@@ -12,6 +12,10 @@ description: |
   as mobile (Android, iOS) and web-based (HTML5) platforms..
 confinement: strict
 
+architectures:
+  - build-on: i386
+  - build-on: amd64
+
 apps:
   godot:
     command: desktop-launch $SNAP/bin/Godot
