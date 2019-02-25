@@ -10,7 +10,7 @@ description: |
   be exported in one click to a number of platforms, including
   the major desktop platforms (Linux, Mac OSX, Windows) as well
   as mobile (Android, iOS) and web-based (HTML5) platforms..
-confinement: strict
+confinement: classic
 
 architectures:
   - build-on: i386
@@ -19,16 +19,6 @@ architectures:
 apps:
   godot:
     command: desktop-launch $SNAP/bin/Godot
-    plugs:
-      - network
-      - network-bind
-      - opengl
-      - desktop
-      - desktop-legacy
-      - x11
-      - pulseaudio
-      - home
-      - removable-media
 
 parts:
   godot:
