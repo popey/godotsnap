@@ -18,7 +18,7 @@ architectures:
 
 apps:
   godot:
-    command: desktop-launch $SNAP/bin/Godot
+    command: $SNAP/bin/desktop-launch $SNAP/bin/Godot
 
 parts:
   godot:
