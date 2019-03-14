@@ -18,7 +18,9 @@ architectures:
 
 apps:
   godot:
-    command: $SNAP/bin/desktop-launch $SNAP/bin/Godot
+    command: bin/desktop-launch $SNAP/bin/Godot
+    environment:
+      LD_LIBRARY_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio:$LD_LIBRARY_PATH"
 
 parts:
   godot:
@@ -49,5 +51,4 @@ parts:
       - libvorbisfile3
       - libwebp5
     organize:
-      'usr/lib/*/pulseaudio/lib*': 'lib/'
       'Godot_v*-stable_x11.*': 'bin/Godot'
